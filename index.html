@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -21,7 +21,7 @@
 
 </head>
 
-<body >
+<body>
 
     <div class="app-wrapper">
         <div class="app-left-section">
@@ -34,28 +34,54 @@
             <div class="notebooks-section">
                 <div class="notebooks-section-header">
                     <p>NOTEBOOKS</p>
-                    <button class="add-notebook-btn">
+                    <button class="add-new-notebook-btn">
                         <i class="ri-add-line"></i>
                     </button>
                 </div>
                 <div class="notebooks-container">
-                    <div class="notebook">Javascript Guide</div>
-                    <div class="notebook">Css Variables</div>
-                    <div class="notebook">Html</div>
+                    <div class="notebook active">
+                        <p class="notebook-title" contenteditable="false">Javascript Basics</p>
+                        <div class="notebook-btns-wrapper">
+                            <button class="edit-notebook-title-btn">
+                                <i class="ri-pencil-line"></i>
+                            </button>
+                            <button class="delete-notebook-btn">
+                                <i class="ri-delete-bin-line"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
+
+                <!--    Overlay for adding new Notebook           -->
+
+                <div class="overlay" id="add-new-notebook-overlay">
+                    <div class="add-notebook-form-wrapper">
+                        <h4>Add New Notebook</h4>
+                        <input type="text" placeholder="Notebook's title" id="notebook-title-input">
+                        <div>
+                            <button class="add-notebook">
+                                Add
+                            </button>
+                            <button class="cancle-add-notebook">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
         <div class="app-right-section">
             <div class="app-right-section-header">
                 <div class="greetings-wrapper">
-                    <p>Good Morning</p>
-                    <p class="todays-date">Thu , Oct 05 2024</p>
+                    <p class="greeting"></p>
+                    <p class="todays-date"></p>
                 </div>
                 <div class="theme-toggle-btns">
-                    <button class="light-theme">
+                    <button class="light-theme ">
                         <i class="ri-sun-line"></i>
                     </button>
-                    <button class="dark-theme">
+                    <button class="dark-theme active">
                         <i class="ri-moon-line"></i>
                     </button>
                 </div>
@@ -68,6 +94,24 @@
                     <i class="ri-add-line"></i>
                     <p>New note</p>
                 </button>
+            </div>
+
+
+            <!-- New Note Overlay -->
+            <div class="overlay" id="add-new-note-overlay">
+                <div class="add-new-note-form">
+                    <h4>Add new note to your notebook</h4>
+
+                    <input type="text" id="new-notes-title-input" placeholder="Note title">
+
+                    <textarea id="new-note-content" placeholder="Add your note.."></textarea>
+
+                    <div>
+                        <button class="save-note-btn">Save</button>
+                        <button class="cancel-note-btn">Cancel</button>
+                    </div>
+
+                </div>
             </div>
 
             <div class="notes-wrapper">
@@ -84,168 +128,22 @@
                     <div class="note-update-date">
                         5 days ago
                     </div>
+                    <button class="delete-note-btn">
+                        <i class="ri-delete-bin-line"></i>
+                    </button>
                 </div>
 
-                <div class="note">
-                    <div class="note-title">
-                        Functions
-                    </div>
-                    <div class="note-content">
-                        hitecto aspernatur magni officia incidunt? Maxime, iure qui.
-                    </div>
-                    <div class="note-update-date">
-                        5 days ago
-                    </div>
-
-                </div>
-
-                <div class="note">
-                    <div class="note-title">
-                        Functions
-                    </div>
-                    <div class="note-content">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident temporibus tempora quas unde
-                        neque! Eveniet porro beatae animi quam voluptate assumenda, consectetur veniam eius est
-                        accusantium, vel odio soluta quisquam, repellat dolore architecto aspernatur magni officia
-                        incidunt? Maxime, iure qui.
-                    </div>
-                    <div class="note-update-date">
-                        5 days ago
-                    </div>
-                </div>
-
-                <div class="note">
-                    <div class="note-title">
-                        Functions
-                    </div>
-                    <div class="note-content">
-                        hitecto aspernatur magni officia incidunt? Maxime, iure qui.
-                    </div>
-                    <div class="note-update-date">
-                        5 days ago
-                    </div>
-
-                </div>
-
-                <div class="note">
-                    <div class="note-title">
-                        Functions
-                    </div>
-                    <div class="note-content">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident temporibus tempora quas unde
-                        neque! Eveniet porro beatae animi quam voluptate assumenda, consectetur veniam eius est
-                        accusantium, vel odio soluta quisquam, repellat dolore architecto aspernatur magni officia
-                        incidunt? Maxime, iure qui.
-                    </div>
-                    <div class="note-update-date">
-                        5 days ago
-                    </div>
-                </div>
-
-                <div class="note">
-                    <div class="note-title">
-                        Functions
-                    </div>
-                    <div class="note-content">
-                        hitecto aspernatur magni officia incidunt? Maxime, iure qui.
-                    </div>
-                    <div class="note-update-date">
-                        5 days ago
-                    </div>
-
-                </div>
-
-                <div class="note">
-                    <div class="note-title">
-                        Functions
-                    </div>
-                    <div class="note-content">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident temporibus tempora quas unde
-                        neque! Eveniet porro beatae animi quam voluptate assumenda, consectetur veniam eius est
-                        accusantium, vel odio soluta quisquam, repellat dolore architecto aspernatur magni officia
-                        incidunt? Maxime, iure qui.
-                    </div>
-                    <div class="note-update-date">
-                        5 days ago
-                    </div>
-                </div>
-
-                <div class="note">
-                    <div class="note-title">
-                        Functions
-                    </div>
-                    <div class="note-content">
-                        hitecto aspernatur magni officia incidunt? Maxime, iure qui.
-                    </div>
-                    <div class="note-update-date">
-                        5 days ago
-                    </div>
-
-                </div>
-
-                <div class="note">
-                    <div class="note-title">
-                        Functions
-                    </div>
-                    <div class="note-content">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident temporibus tempora quas unde
-                        neque! Eveniet porro beatae animi quam voluptate assumenda, consectetur veniam eius est
-                        accusantium, vel odio soluta quisquam, repellat dolore architecto aspernatur magni officia
-                        incidunt? Maxime, iure qui.
-                    </div>
-                    <div class="note-update-date">
-                        5 days ago
-                    </div>
-                </div>
-
-                <div class="note">
-                    <div class="note-title">
-                        Functions
-                    </div>
-                    <div class="note-content">
-                        hitecto aspernatur magni officia incidunt? Maxime, iure qui.
-                    </div>
-                    <div class="note-update-date">
-                        5 days ago
-                    </div>
-
-                </div>
-
-                <div class="note">
-                    <div class="note-title">
-                        Functions
-                    </div>
-                    <div class="note-content">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident temporibus tempora quas unde
-                        neque! Eveniet porro beatae animi quam voluptate assumenda, consectetur veniam eius est
-                        accusantium, vel odio soluta quisquam, repellat dolore architecto aspernatur magni officia
-                        incidunt? Maxime, iure qui.
-                    </div>
-                    <div class="note-update-date">
-                        5 days ago
-                    </div>
-                </div>
-
-                <div class="note">
-                    <div class="note-title">
-                        Functions
-                    </div>
-                    <div class="note-content">
-                        hitecto aspernatur magni officia incidunt? Maxime, iure qui.
-                    </div>
-                    <div class="note-update-date">
-                        5 days ago
-                    </div>
-
-                </div>
 
             </div>
 
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+        integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <script src="script.js"></script>
+    <script src="script.js" type="module"></script>
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -7,74 +7,75 @@
 
 /* CSS VARIABLES */
 
-:root{
+:root {
 
-/* Colors and bg colors */
+    /* Colors and bg colors */
 
---primary-light-color : #4B5945 ;
---second-light-color : #66785F ;
---third-light-color : #91AC8F ;
---forth-light-color: #B2C9AD;
+    --primary-light-color: #4B5945;
+    --second-light-color: #66785F;
+    --third-light-color: #91AC8F;
+    --forth-light-color: #B2C9AD;
 
---black : #000 ;
---black-light : #000000af ;
---font-color : #4B5945;
+    --black: #000;
+    --black-light: #000000af;
+    --font-color: #4B5945;
 
---white : #fff ;
+    --white: #fff;
 
-/* Font Sizes */
+    /* Font Sizes */
 
---fs-1: 1.563rem;
---fs-2: 1.375rem;
---fs-3: 1.25rem;
---fs-4: 1.125rem;
---fs-5: 1rem;
---fs-6: 0.938rem;
---fs-7: 0.875rem;
---fs-8: 0.813rem;
---fs-9: 0.75rem;
---fs-10: 0.688rem;
---fs-11: 0.625rem;
+    --fs-1: 1.563rem;
+    --fs-2: 1.375rem;
+    --fs-3: 1.25rem;
+    --fs-4: 1.125rem;
+    --fs-5: 1rem;
+    --fs-6: 0.938rem;
+    --fs-7: 0.875rem;
+    --fs-8: 0.813rem;
+    --fs-9: 0.75rem;
+    --fs-10: 0.688rem;
+    --fs-11: 0.625rem;
 
-/* Font Weight */
+    /* Font Weight */
 
---weight-300: 300;
---weight-400: 400;
---weight-500: 500;
---weight-600: 600;
---weight-700: 700;
+    --weight-300: 300;
+    --weight-400: 400;
+    --weight-500: 500;
+    --weight-600: 600;
+    --weight-700: 700;
 
-  /**
+    /**
    * border-radius
    */
 
-   --border-radius-md: 10px;
-   --border-radius-sm: 5px;
-   --border-radius-rounded : 50px;
-   /**
+    --border-radius-md: 10px;
+    --border-radius-sm: 5px;
+    --border-radius-rounded: 50px;
+    /**
     * transition 
     */
- 
-   --transition-timing: 0.2s ease;
- 
-   /* Font Family */
 
-   --ff-popins : "Poppins" ;
-   --ff-roboto : "Roboto" ;
+    --transition-timing: 0.2s ease;
+
+    /* Font Family */
+
+    --ff-popins: "Poppins";
+    --ff-roboto: "Roboto";
 
 }
 
 
-body.dark{
-    --primary-light-color : #1E201E;
-    --second-light-color : #3C3D37 ;
-    --third-light-color : #000000 ;
+body.dark {
+    --primary-light-color: #1E201E;
+    --second-light-color: #3C3D37;
+    --third-light-color: #000000;
     --forth-light-color: #000000b2;
     --font-color: #ffffffbb;
-    --black-light : #ffffff9c ;
+    --black-light: #ffffff9c;
 }
 
-body,html{
+body,
+html {
     width: 100%;
     height: 100%;
     font-family: var(--ff-popins);
@@ -83,14 +84,14 @@ body,html{
 
 
 /* app wrapper */
-.app-wrapper{
+.app-wrapper {
     height: 100%;
     width: 100%;
-    display: flex; 
+    display: flex;
 }
 
 
-.app-left-section{
+.app-left-section {
     height: 100%;
     width: 300px;
     background-color: var(--second-light-color);
@@ -98,53 +99,264 @@ body,html{
     display: flex;
     flex-direction: column;
 }
-.app-title{
+
+.app-title {
     font-size: var(--fs-2);
 }
 
 
 
 /* Notebooks section */
-.notebooks-section{
+.notebooks-section {
     margin-top: 15px;
     flex: 1;
 }
-.notebooks-section-header{
+
+.notebooks-section-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 8px;
 }
-.notebooks-section-header p{
+
+.notebooks-section-header p {
     font-size: var(--fs-7);
 }
-.add-notebook-btn{
+
+.add-new-notebook-btn {
     background-color: transparent;
     border: none;
     font-size: 1rem;
     color: white;
+    cursor: pointer;
 }
-.notebooks-container{
+
+.notebooks-container {
     margin-top: 10px;
     display: flex;
     flex-direction: column;
     gap: 2px;
 }
 
-.notebook{
+.notebook {
     font-size: var(--fs-9);
-    padding: 0.8rem 1rem ;
+    padding: 0.8rem 1rem;
     transition: var(--transition-timing);
     border-radius: var(--border-radius-rounded);
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
-.notebook:hover{
+
+.notebook button {
+    background-color: transparent;
+    border: none;
+    color: var(--white);
+    margin-left: 5px;
+    font-size: var(--fs-6);
+    cursor: pointer;
+    opacity: 0;
+    transition: ease all 250ms;
+}
+
+.notebook.active {
     background-color: var(--primary-light-color);
 }
 
+.notebook-title {
+    border: none;
+    outline: none;
+}
+
+.notebook:hover {
+    background-color: var(--primary-light-color);
+}
+
+.notebook:hover button {
+    opacity: 1;
+}
+
+
+/* ----------------- Overlay -------------- */
+.overlay {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: rgba(61, 61, 61, 0.555);
+    z-index: 5;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+   
+
+}
+
+.add-notebook-form-wrapper {
+    background-color: var(--primary-light-color);
+    padding: 1rem;
+    height: fit-content;
+    width: 400px;
+    max-width: 80%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+
+
+.add-notebook-form-wrapper h4 {
+    font-size: var(--fs-5);
+    font-family: var(--ffr);
+    text-align: center;
+}
+
+#notebook-title-input {
+    color: white;
+    outline: none;
+    padding: 0.7rem;
+    font-size: var(--fs-5);
+    background-color: transparent;
+    border: 1px solid var(--forth-light-color);
+    margin-top: 10px;
+    border-radius: 5px;
+    font-family: var(--ff-roboto);
+}
+
+#notebook-title-input::placeholder {
+    color: rgba(255, 255, 255, 0.733);
+}
+
+.add-notebook-form-wrapper div {
+
+    margin-top: 10px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.add-notebook-form-wrapper button {
+    cursor: pointer;
+    font-size: var(--fs-5);
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-weight: var(--weight-600);
+    margin: 10px 0;
+}
+
+
+/* ---------------------------- */
+
+.add-new-note-form {
+    background-color: var(--primary-light-color);
+    color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    max-width: 90%;
+    gap: 10px;
+}
+
+.add-new-note-form h4 {
+    text-align: center;
+    font-family: var(--ff-roboto);
+
+}
+
+#new-notes-title-input {
+    color: white;
+    outline: none;
+    padding: 0.7rem;
+    font-size: var(--fs-5);
+    background-color: transparent;
+    border: 1px solid var(--forth-light-color);
+    margin-top: 10px;
+    border-radius: 5px;
+    font-family: var(--ff-roboto);
+
+}
+
+#new-notes-title-input::placeholder {
+    color: rgba(255, 255, 255, 0.733);
+}
+
+#new-note-content {
+    color: white;
+    outline: none;
+    padding: 0.7rem;
+    font-size: var(--fs-7);
+    background-color: transparent;
+    border: 1px solid var(--forth-light-color);
+  
+    border-radius: 5px;
+    font-family: var(--ff-roboto);
+    height: 400px;
+    max-height: 400px;
+    resize: none;
+    scrollbar-width: 0;
+
+}
+
+textarea {
+    overflow: scroll;
+    /* Ensure scrolling is possible */
+    scrollbar-width: thin;
+    /* For Firefox */
+    scrollbar-color: transparent transparent;
+    /* For Firefox */
+}
+
+textarea::-webkit-scrollbar {
+    width: 0;
+    /* Hide the scrollbar in WebKit browsers (Chrome, Safari) */
+}
+
+textarea::-webkit-scrollbar-thumb {
+    background: transparent;
+    /* Make the scrollbar thumb transparent */
+}
+
+#new-note-content::placeholder {
+    color: rgba(255, 255, 255, 0.733);
+}
+
+
+.add-new-note-form div{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+
+
+.add-new-note-form  button {
+    cursor: pointer;
+    font-size: var(--fs-5);
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-weight: var(--weight-600);
+    margin: 10px 0;
+}
+
+
+
+
+
+
 /*  -------------------  App right section ------------- */
 
-.app-right-section{
+.app-right-section {
     height: 100%;
     padding: 1rem;
     flex: 1;
@@ -153,27 +365,29 @@ body,html{
     flex-direction: column;
     background-color: var(--forth-light-color);
 }
-.app-right-section-header{
+
+.app-right-section-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.todays-date{
+.todays-date {
     font-size: 12px;
     color: var(--black-light);
     position: relative;
     top: -2px;
 }
-.theme-toggle-btns{
+
+.theme-toggle-btns {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-  
+
 }
 
-.theme-toggle-btns button{
+.theme-toggle-btns button {
     background-color: transparent;
     border: none;
     font-size: var(--fs-4);
@@ -181,13 +395,26 @@ body,html{
     right: 10px;
     cursor: pointer;
     color: var(--font-color);
-}
-
-.light-theme{
     display: none;
 }
 
-.selectes-notebook-info-wrapper{
+.theme-toggle-btns .active{
+    display: block;
+    animation: rotateAndRise ease 250ms 1;
+    transition: ease all 250ms;
+}
+
+@keyframes rotateAndRise {
+    0%{
+        transform: rotate(-75deg);
+    }
+    100%{
+        transform: rotate(0deg);
+    }
+}
+
+
+.selectes-notebook-info-wrapper {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -197,30 +424,30 @@ body,html{
 
 }
 
-.add-new-note-btn{
-background-color: transparent;
-border: none;
-display: flex;
-gap:5px;
-font-weight: var(--weight-600);
-color: var(--font-color);
-cursor: pointer;
+.add-new-note-btn {
+    background-color: transparent;
+    border: none;
+    display: flex;
+    gap: 5px;
+    font-weight: var(--weight-600);
+    color: var(--font-color);
+    cursor: pointer;
 }
 
-.notes-wrapper{
+.notes-wrapper {
     flex: 1;
- display: grid;
- grid-template-columns: repeat(auto-fill , minmax(280px , 1fr));
- align-content: flex-start;
- align-items: stretch;
- gap: 1rem;
- margin-top: 10px;
-scrollbar-width: none;
- overflow-y:scroll ;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    align-content: flex-start;
+    align-items: stretch;
+    gap: 1rem;
+    margin-top: 10px;
+    scrollbar-width: none;
+    overflow-y: scroll;
 }
 
 
-.note{
+.note {
     padding: 10px 10px 25px;
     border-radius: var(--border-radius-md);
     border: 1px solid var(--font-color);
@@ -228,31 +455,46 @@ scrollbar-width: none;
     flex-direction: column;
     gap: 0.5rem;
     position: relative;
+    cursor: pointer;
 }
 
-.note-title{
+.note-title {
     font-size: var(--fs-6);
-    
+
 }
 
-.note-content{
+.note-content {
     line-clamp: 4;
     -webkit-line-clamp: 4;
-    overflow: hidden; 
+    overflow: hidden;
     display: -webkit-box;
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
-     font-size: var(--fs-8);
+    font-size: var(--fs-8);
+    margin-bottom: 15px;
 }
 
-.note-update-date{
+.note-update-date {
     position: absolute;
-    bottom: 2px;
-   
+    bottom: 10px;
+
     font-size: var(--fs-11);
 }
 
 
+.delete-note-btn {
+    position: absolute;
+    right: 15px;
+    background-color: transparent;
+    border: none;
+    font-size: var(--fs-4);
+    bottom: 5px;
+    cursor: pointer;
+    opacity: 0;
+    transition: ease all 250ms;
+    color: var(--font-color);
+}
 
-
-
+.note:hover .delete-note-btn {
+    opacity: 1;
+}
