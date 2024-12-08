@@ -136,6 +136,7 @@ html {
     display: flex;
     flex-direction: column;
     gap: 2px;
+    max-width: 100%;
 }
 
 .notebook {
@@ -147,6 +148,7 @@ html {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    max-width: 100%;
 }
 
 .notebook button {
@@ -167,6 +169,8 @@ html {
 .notebook-title {
     border: none;
     outline: none;
+    flex: 1;
+    max-width: 80%;
 }
 
 .notebook:hover {

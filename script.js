@@ -7,6 +7,8 @@ const cancelNewNoteBtn = document.querySelector(".cancel-note-btn");
 
 // Slections all the different containers
 const notebooksContainer = document.querySelector(".notebooks-container");
+const notebooks = document.querySelectorAll('.notebook')
+const editNotebooksTitleBtns = document.querySelectorAll('.edit-notebook-title-btn')
 const sun = document.querySelector(".dark-theme");
 const moon = document.querySelector(".light-theme");
 const greeting = document.querySelector(".greeting");
@@ -52,7 +54,6 @@ const setCurrentDate = () => {
   let year = d.getFullYear()
   let hrs = d.getHours()
   const day = days[d.getDay()].substring(0,3)
-  console.log(month,date,year,hrs,days);
 
   currentDate.innerHTML = `${day}, ${month} ${+date > 10 ? date : date.padStart(2 , "0")} ${year} `
   greeting.innerHTML = `Good ${hrs < 12 ? "Morning" : hrs < 16 ?"Evening" : hrs < 20 ? "Night" : "Evening"}`
@@ -60,6 +61,44 @@ const setCurrentDate = () => {
 };
 
 setCurrentDate()
+
+
+// Functionality of editing the title of the notebook
+
+const editNotebookTitle = (notebook) =>{
+  const titleDiv = notebook.querySelector('.notebook-title')
+  titleDiv.contentEditable = "true" ;
+  titleDiv.focus()
+
+  titleDiv.addEventListener('blur', function() {
+    titleDiv.contentEditable = "false";
+  });
+}
+
+editNotebooksTitleBtns.forEach((editBtns , index) => {
+
+editBtns.addEventListener('click',()=>{
+  editNotebookTitle(notebooks[index])
+})
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
