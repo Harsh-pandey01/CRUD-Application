@@ -5,16 +5,19 @@ const cancelAddNotebookBtn = document.querySelector(".cancle-add-notebook");
 const addNotebookBtn = document.querySelector(".add-notebook");
 const addNewNoteBtn = document.querySelector(".add-new-note-btn");
 const cancelNewNoteBtn = document.querySelector(".cancel-note-btn");
+const saveNewNoteBtn = document.querySelector('.save-note-btn')
 
 // Slections all the different containers
 const notebooksContainer = document.querySelector(".notebooks-container");
 const allNotebooks = document.querySelectorAll(".notebook");
-
+const notesWrapper = document.querySelector('.notes-wrapper')
 const newNotebookTitleInput = document.querySelector("#notebook-title-input");
 const sun = document.querySelector(".dark-theme");
 const moon = document.querySelector(".light-theme");
 const greeting = document.querySelector(".greeting");
 const currentDate = document.querySelector(".todays-date");
+const newNoteTitleInput = document.querySelector('#new-notes-title-input')
+const newNoteForm = document.querySelector('#newNoteForm')
 
 // Data Regarding the notebooks and the books present in the notes
 
@@ -73,7 +76,7 @@ const setCurrentDate = () => {
     +date > 10 ? date : date.padStart(2, "0")
   } ${year} `;
   greeting.innerHTML = `Good ${
-    hrs < 12 ? "Morning" : hrs < 16 ? "Evening" : hrs < 20 ? "Night" : "Evening"
+    hrs < 12 ? "Morning" : hrs < 16 ? "Evening" : hrs < 20 ? "Evening" : "Night"
   }`;
 };
 
@@ -121,7 +124,8 @@ function handleNotebooksLoad() {
 
     newNotebook
       .querySelector(".edit-notebook-title-btn")
-      .addEventListener("click", () => {
+      .addEventListener("click", (e) => {
+        e.stopPropagation()
         editNotebookTitle(newNotebook);
       });
 
@@ -153,6 +157,10 @@ function editNotebookTitle(notebook) {
   titleDiv.contentEditable = "true";
   titleDiv.focus();
 
+  titleDiv.addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
+
   titleDiv.addEventListener("blur", function () {
     titleDiv.contentEditable = "false";
   });
@@ -176,7 +184,7 @@ const createNewNotebook = (notebookTitle) => {
   notebooksData.forEach((data) => {
      data.isActive =  false;
   });
-
+ 
 
   const newNotebookData = {
     id: crypto.randomUUID(),
@@ -201,6 +209,46 @@ addNotebookBtn.addEventListener("click", () => {
     cancelAddNotebookBtn.click();
   }
 });
+
+
+
+
+
+
+// --------------------------------- Notes Section
+
+
+function createNewNoteHandle(){
+  // check if the input provided by the inputs then only note are being made
+ const formData = new formData(document.querySelector('#newNoteForm'))
+ for (const [key, value] of formData) {
+  console.log(key,value);
+  
+}
+}
+
+
+
+saveNewNoteBtn.addEventListener('click',(e)=>{
+
+createNewNoteHandle()
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // --------------------------------------- Gsap Animations
 
