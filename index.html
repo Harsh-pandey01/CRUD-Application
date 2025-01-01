@@ -39,18 +39,7 @@
                     </button>
                 </div>
                 <div class="notebooks-container">
-                    <!-- <div class="notebook active">
-                        <p class="notebook-title" contenteditable="false">Javascript Basics</p>
-                        <div class="notebook-btns-wrapper">
-                            <button class="edit-notebook-title-btn">
-                                <i class="ri-pencil-line"></i>
-                            </button>
-                            <button class="delete-notebook-btn">
-                                <i class="ri-delete-bin-line"></i>
-                            </button>
-                        </div>
-                    </div>
-                     -->
+                    
                 </div>
 
                 <!--    Overlay for adding new Notebook           -->
@@ -72,7 +61,7 @@
 
             </div>
         </div>
-        <div class="app-right-section">
+        <div class="app-right-section ">
             <div class="app-right-section-header">
                 <div class="greetings-wrapper">
                     <p class="greeting"></p>
@@ -89,7 +78,7 @@
             </div>
             <div class="selectes-notebook-info-wrapper">
                 <p class="selected-notebook-title">
-                    Javascript Guide
+                    
                 </p>
                 <button class="add-new-note-btn">
                     <i class="ri-add-line"></i>
@@ -97,6 +86,12 @@
                 </button>
             </div>
 
+            <!-- Message when no books are present -->
+
+            <div class="no-Notebooks-present-message-wrapper">
+               <h1>"No notes yet! Start by adding your first note to keep track of your ideas."</h1>
+               <button class="first-notebook-btn">Add NoteBook</button>
+            </div>
 
             <!-- New Note Overlay -->
             <div class="overlay" id="add-new-note-overlay">
@@ -104,40 +99,21 @@
                     <h4>Add new note to your notebook</h4>
 
                     <form action="#" id="newNoteForm">
-                        <input type="text" id="new-notes-title-input" placeholder="Note title">
+                        <input type="text" id="new-notes-title-input" name="note-title" autocomplete="off" placeholder="Note title">
 
-                    <textarea id="new-note-content" placeholder="Add your note.."></textarea>
-                    <div>
-                        <button class="save-note-btn">Save</button>
-                        <button class="cancel-note-btn">Cancel</button>
-                    </div>
+                        <textarea id="new-note-content" name="note-content" placeholder="Add your note.."></textarea>
+                        <div>
+                            <button class="save-note-btn">Save</button>
+                            <button class="cancel-note-btn">Cancel</button>
+                        </div>
                     </form>
-                   
+
 
                 </div>
             </div>
 
             <div class="notes-wrapper">
-                <div class="note">
-                    <div class="note-title">
-                        Functions
-                    </div>
-                    <div class="note-content">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident temporibus tempora quas unde
-                        neque! Eveniet porro beatae animi quam voluptate assumenda, consectetur veniam eius est
-                        accusantium, vel odio soluta quisquam, repellat dolore architecto aspernatur magni officia
-                        incidunt? Maxime, iure qui.
-                    </div>
-                    <div class="note-update-date">
-                        5 days ago
-                    </div>
-                    <button class="delete-note-btn">
-                        <i class="ri-delete-bin-line"></i>
-                    </button>
-                </div>
-
-
-            </div>
+           </div>
 
         </div>
     </div>

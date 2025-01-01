@@ -5,23 +5,29 @@ const cancelAddNotebookBtn = document.querySelector(".cancle-add-notebook");
 const addNotebookBtn = document.querySelector(".add-notebook");
 const addNewNoteBtn = document.querySelector(".add-new-note-btn");
 const cancelNewNoteBtn = document.querySelector(".cancel-note-btn");
-const saveNewNoteBtn = document.querySelector('.save-note-btn')
+const saveNewNoteBtn = document.querySelector(".save-note-btn");
+const firstNotebookBtn = document.querySelector(".first-notebook-btn");
 
 // Slections all the different containers
 const notebooksContainer = document.querySelector(".notebooks-container");
 const allNotebooks = document.querySelectorAll(".notebook");
-const notesWrapper = document.querySelector('.notes-wrapper')
+const notesWrapper = document.querySelector(".notes-wrapper");
 const newNotebookTitleInput = document.querySelector("#notebook-title-input");
 const sun = document.querySelector(".dark-theme");
 const moon = document.querySelector(".light-theme");
 const greeting = document.querySelector(".greeting");
 const currentDate = document.querySelector(".todays-date");
-const newNoteTitleInput = document.querySelector('#new-notes-title-input')
-const newNoteForm = document.querySelector('#newNoteForm')
+const newNoteTitleInput = document.querySelector("#new-notes-title-input");
+const newNoteForm = document.querySelector("#newNoteForm");
+const selectedNotebookTitle = document.querySelector(
+  ".selected-notebook-title"
+);
+const appRightWrapper = document.querySelector(".app-right-section");
 
 // Data Regarding the notebooks and the books present in the notes
 
 let notebooksData = [];
+let activeNotebookId;
 
 // Function to change the theme
 
@@ -76,7 +82,13 @@ const setCurrentDate = () => {
     +date > 10 ? date : date.padStart(2, "0")
   } ${year} `;
   greeting.innerHTML = `Good ${
-    hrs < 12 ? "Morning" : hrs < 16 ? "Evening" : hrs < 20 ? "Evening" : "Night"
+    hrs < 12
+      ? "Morning"
+      : hrs < 16
+      ? "Afternoon"
+      : hrs < 20
+      ? "Evening"
+      : "Night"
   }`;
 };
 
@@ -100,11 +112,20 @@ fetchNotebooksDataFromLS();
 function handleNotebooksLoad() {
   // loading each and every notebooks based on the notebooks data
   notebooksContainer.innerHTML = "";
+  if (notebooksData.length > 0) {
+    appRightWrapper.classList.add("notebook-present");
+  } else {
+    appRightWrapper.classList.remove("notebook-present");
+  }
   notebooksData.forEach((notebook) => {
     let newNotebook = document.createElement("div");
     newNotebook.classList.add("notebook");
     if (notebook.isActive) {
       newNotebook.classList.add("active");
+      activeNotebookId = notebook.id;
+      selectedNotebookTitle.innerHTML = notebook.title;
+      // Function to list all the notes of the active notebook
+      handleListingAllNotes(notebook);
     }
 
     newNotebook.innerHTML = `
@@ -125,7 +146,7 @@ function handleNotebooksLoad() {
     newNotebook
       .querySelector(".edit-notebook-title-btn")
       .addEventListener("click", (e) => {
-        e.stopPropagation()
+        e.stopPropagation();
         editNotebookTitle(newNotebook);
       });
 
@@ -134,14 +155,22 @@ function handleNotebooksLoad() {
     newNotebook
       .querySelector(".delete-notebook-btn")
       .addEventListener("click", (e) => {
+        e.stopPropagation();
         deleteNotebook(notebook.id);
       });
 
     // Event Listener for the notebook when it is clicked and active
 
     newNotebook.addEventListener("click", (e) => {
+      console.log("clicked");
+
       notebooksData.forEach((data) => {
-        data.isActive = data.id == notebook.id ? true : false;
+        if (data.id == notebook.id) {
+          data.isActive = true;
+          activeNotebookId = notebook.id;
+        } else {
+          data.isActive = false;
+        }
       });
 
       localStorage.setItem("notebooksData", JSON.stringify(notebooksData));
@@ -171,6 +200,15 @@ function deleteNotebook(notebookId) {
     return elem.id != notebookId;
   });
 
+  if (activeNotebookId == notebookId) {
+    if (newData.length > 0) {
+      newData[0].isActive = true;
+      activeNotebookId = newData[0].id;
+    } else {
+      activeNotebookId = "";
+    }
+  }
+
   localStorage.setItem("notebooksData", JSON.stringify(newData));
   fetchNotebooksDataFromLS();
 }
@@ -182,9 +220,8 @@ const createNewNotebook = (notebookTitle) => {
   // notebook to get the updated notebooks
 
   notebooksData.forEach((data) => {
-     data.isActive =  false;
+    data.isActive = false;
   });
- 
 
   const newNotebookData = {
     id: crypto.randomUUID(),
@@ -210,45 +247,100 @@ addNotebookBtn.addEventListener("click", () => {
   }
 });
 
+// first notebook btn
 
-
-
-
+firstNotebookBtn.addEventListener("click", () => {
+  addNewNotebookBtn.click();
+});
 
 // --------------------------------- Notes Section
 
+//  To prevent the default submit behaviour of the form
+newNoteForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+});
 
-function createNewNoteHandle(){
-  // check if the input provided by the inputs then only note are being made
- const formData = new formData(document.querySelector('#newNoteForm'))
- for (const [key, value] of formData) {
-  console.log(key,value);
-  
+function handleAddNewNote() {
+  const formData = new FormData(newNoteForm);
+
+  const newNote = {};
+
+  for (const [key, value] of formData) {
+    if (value) {
+      newNote[key] = value;
+      newNote.id = crypto.randomUUID();
+    } else {
+      alert("fill all the inputs");
+      return;
+    }
+  }
+  newNoteForm.reset();
+  // get the notebook and also push the new note to the noteBook
+  notebooksData.forEach((data) => {
+    if (data.id == activeNotebookId) {
+      data.notes.push(newNote);
+    }
+  });
+
+  localStorage.setItem("notebooksData", JSON.stringify(notebooksData));
+  fetchNotebooksDataFromLS();
+
+  cancelNewNoteBtn.click();
 }
+
+saveNewNoteBtn.addEventListener("click", handleAddNewNote);
+
+// Function to list all the notebook of the active notebook
+
+function handleListingAllNotes(activeNotebook) {
+  notesWrapper.innerHTML = "";
+
+  if (activeNotebook.notes.length > 0) {
+    activeNotebook.notes.forEach((note) => {
+      console.log(note.id);
+
+      const noteElement = document.createElement("div");
+      noteElement.classList.add("note");
+      noteElement.innerHTML = `
+      <div class="note-title">
+                        ${note["note-title"]}
+                    </div>
+                    <div class="note-content">
+                        ${note["note-content"]}
+                    </div>
+                    <div class="note-update-date">
+                        5 days ago
+                    </div>
+                    <button class="delete-note-btn">
+                        <i class="ri-delete-bin-line"></i>
+                    </button>
+      `;
+
+      // event listener to delete a note from the noteList
+
+      noteElement
+        .querySelector(".delete-note-btn")
+        .addEventListener("click", () => {
+          handleDeleteANote(note.id, activeNotebook);
+        });
+
+      notesWrapper.append(noteElement);
+    });
+  }
 }
 
+// Function to handle the delete note from notes wrapper
 
+function handleDeleteANote(noteId, currentNotebook) {
+  const updatedNotesList = currentNotebook.notes.filter((note) => {
+    return note.id != noteId;
+  });
 
-saveNewNoteBtn.addEventListener('click',(e)=>{
+  currentNotebook.notes = updatedNotesList;
 
-createNewNoteHandle()
-
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  localStorage.setItem("notebooksData", JSON.stringify(notebooksData));
+  fetchNotebooksDataFromLS();
+}
 
 // --------------------------------------- Gsap Animations
 
