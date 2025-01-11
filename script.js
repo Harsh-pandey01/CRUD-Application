@@ -7,7 +7,7 @@ const addNewNoteBtn = document.querySelector(".add-new-note-btn");
 const cancelNewNoteBtn = document.querySelector(".cancel-note-btn");
 const saveNewNoteBtn = document.querySelector(".save-note-btn");
 const firstNotebookBtn = document.querySelector(".first-notebook-btn");
-
+const firstNoteBtn = document.querySelector('.first-note-btn')
 // Slections all the different containers
 const notebooksContainer = document.querySelector(".notebooks-container");
 const allNotebooks = document.querySelectorAll(".notebook");
@@ -23,7 +23,7 @@ const selectedNotebookTitle = document.querySelector(
   ".selected-notebook-title"
 );
 const appRightWrapper = document.querySelector(".app-right-section");
-
+const noNotesPresentWrapper = document.querySelector('.no-Notes-present-message-wrapper')
 // Data Regarding the notebooks and the books present in the notes
 
 let notebooksData = [];
@@ -116,6 +116,7 @@ function handleNotebooksLoad() {
     appRightWrapper.classList.add("notebook-present");
   } else {
     appRightWrapper.classList.remove("notebook-present");
+    noNotesPresentWrapper.classList.remove('active')
   }
   notebooksData.forEach((notebook) => {
     let newNotebook = document.createElement("div");
@@ -162,7 +163,6 @@ function handleNotebooksLoad() {
     // Event Listener for the notebook when it is clicked and active
 
     newNotebook.addEventListener("click", (e) => {
-      console.log("clicked");
 
       notebooksData.forEach((data) => {
         if (data.id == notebook.id) {
@@ -253,7 +253,14 @@ firstNotebookBtn.addEventListener("click", () => {
   addNewNotebookBtn.click();
 });
 
+
 // --------------------------------- Notes Section
+
+// adding first Note Btn
+firstNoteBtn.addEventListener('click',()=>{
+  addNewNoteBtn.click()
+})
+
 
 //  To prevent the default submit behaviour of the form
 newNoteForm.addEventListener("submit", (e) => {
@@ -295,9 +302,11 @@ saveNewNoteBtn.addEventListener("click", handleAddNewNote);
 function handleListingAllNotes(activeNotebook) {
   notesWrapper.innerHTML = "";
 
+  
   if (activeNotebook.notes.length > 0) {
+    noNotesPresentWrapper.classList.remove('active')
     activeNotebook.notes.forEach((note) => {
-      console.log(note.id);
+      
 
       const noteElement = document.createElement("div");
       noteElement.classList.add("note");
@@ -326,6 +335,8 @@ function handleListingAllNotes(activeNotebook) {
 
       notesWrapper.append(noteElement);
     });
+  }else{
+     noNotesPresentWrapper.classList.add('active')
   }
 }
 

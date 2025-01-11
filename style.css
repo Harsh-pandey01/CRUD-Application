@@ -468,14 +468,16 @@ textarea::-webkit-scrollbar-thumb {
     display: none;
 }
 
-.first-notebook-btn{
+.first-notebook-btn,.first-note-btn{
     cursor: pointer;
     background: transparent;
     border: none;
     text-decoration: underline;
     color: var(--font-color);
-    font-weight: var(--weight-500);
+    font-weight: var(--weight-600);
     padding: 0.5rem 1rem;
+  
+    font-size: 1rem;
 }
 
 .notes-wrapper {
@@ -488,6 +490,20 @@ textarea::-webkit-scrollbar-thumb {
     margin-top: 10px;
     scrollbar-width: none;
     overflow-y: scroll;
+   
+}
+
+
+.no-Notes-present-message-wrapper {
+  display: none;
+}
+.no-Notes-present-message-wrapper.active{
+    display: block;
+    position: absolute;
+    text-align: center;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
 }
 
 
@@ -516,6 +532,13 @@ textarea::-webkit-scrollbar-thumb {
     -webkit-box-orient: vertical;
     font-size: var(--fs-8);
     margin-bottom: 15px;
+}
+.panda-iamge{
+    max-width: 80%;
+}
+.panda-iamge1{
+    max-width: 300px;
+    max-width: 40%;
 }
 
 .note-update-date {
