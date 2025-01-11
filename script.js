@@ -26,6 +26,12 @@ const appRightWrapper = document.querySelector(".app-right-section");
 const noNotesPresentWrapper = document.querySelector(
   ".no-Notes-present-message-wrapper"
 );
+const noteDataOverlay = document.querySelector("#notes-data-overlay");
+const closeNoteDataBtn = document.querySelector(".close-note-data");
+const noteDataWrapper = document.querySelector(".note-data-wrapper");
+const editNoteDataBtn = document.querySelector(".edit-notedata-btn");
+const saveEditedNoteDataBtn = document.querySelector(".save-edit-note-btn");
+
 // Data Regarding the notebooks and the books present in the notes
 
 let notebooksData = [];
@@ -159,7 +165,7 @@ function handleNotebooksLoad() {
       .querySelector(".edit-notebook-title-btn")
       .addEventListener("click", (e) => {
         e.stopPropagation();
-        editNotebookTitle(newNotebook,notebook);
+        editNotebookTitle(newNotebook, notebook);
       });
 
     // Functionality of deleting a notebook
@@ -191,9 +197,7 @@ function handleNotebooksLoad() {
 
 // Function of editing the title of the notebook
 
-function editNotebookTitle(notebookWrapper , currentNotebookData) {
-  
-
+function editNotebookTitle(notebookWrapper, currentNotebookData) {
   const titleDiv = notebookWrapper.querySelector(".notebook-title");
   titleDiv.contentEditable = "true";
   titleDiv.focus();
@@ -208,7 +212,7 @@ function editNotebookTitle(notebookWrapper , currentNotebookData) {
     notebooksData.forEach((data) => {
       if (data.id == currentNotebookData.id) {
         currentNotebookData.title = titleDiv.textContent;
-      } 
+      }
     });
 
     localStorage.setItem("notebooksData", JSON.stringify(notebooksData));
@@ -345,11 +349,18 @@ function handleListingAllNotes(activeNotebook) {
 
       noteElement
         .querySelector(".delete-note-btn")
-        .addEventListener("click", () => {
+        .addEventListener("click", (e) => {
+          e.stopPropagation();
           handleDeleteANote(note.id, activeNotebook);
         });
 
       notesWrapper.append(noteElement);
+
+      // Event Listener for note when it is clicked and opens up the note data wrapper
+      noteElement.addEventListener("click", (e) => {
+        noteDataOverlayTimeLine.play();
+        handleNoteDataOverlay(note, activeNotebook);
+      });
     });
   } else {
     noNotesPresentWrapper.classList.add("active");
@@ -408,3 +419,81 @@ addNewNoteBtn.addEventListener("click", () => {
 cancelNewNoteBtn.addEventListener("click", () => {
   noteOverlayTimeline.reverse();
 });
+
+var noteDataOverlayTimeLine = gsap.timeline();
+
+noteDataOverlayTimeLine.to(noteDataOverlay, {
+  display: "flex",
+  scale: 1,
+  opacity: 1,
+  duration: 0.1,
+});
+
+noteDataOverlayTimeLine.pause();
+
+function handleNoteDataOverlay(noteElementData, activeNotebook) {
+  const noteDataTitle = noteDataWrapper.querySelector(".note-title");
+  const noteDataContent = noteDataWrapper.querySelector(
+    ".note-data-content-wrapper"
+  );
+
+  noteDataTitle.textContent = noteElementData["note-title"];
+  noteDataContent.textContent = noteElementData["note-content"];
+
+  closeNoteDataBtn.addEventListener("click", () => {
+    noteDataOverlayTimeLine.reverse();
+    noteDataTitle.contentEditable = false;
+
+    noteDataContent.contentEditable = false;
+
+    setTimeout(() => {
+      saveEditedNoteDataBtn.style.display = "none";
+      editNoteDataBtn.style.display = "block";
+    }, 500);
+  });
+
+  editNoteDataBtn.addEventListener("click", () => {
+    noteDataTitle.contentEditable = true;
+    noteDataContent.contentEditable = true;
+    noteDataContent.focus();
+
+    editNoteDataBtn.style.display = "none";
+    saveEditedNoteDataBtn.style.display = "block";
+  });
+
+  saveEditedNoteDataBtn.addEventListener("click", (e) => {
+    handleModifyingAndSavingNote(
+      noteElementData,
+      noteDataTitle,
+      noteDataContent,
+      activeNotebook
+    );
+    closeNoteDataBtn.click()
+    fetchNotebooksDataFromLS();
+  });
+}
+
+function handleModifyingAndSavingNote(
+  noteElementData,
+  title,
+  content,
+  activeNotebook
+) {
+  // Steps :- Locally from the notes section of the active page change the notes and then update the notes throught localstorage and rerender on the website
+  console.log(activeNotebook);
+
+  activeNotebook.notes.forEach((note) => {
+    if (note.id == noteElementData.id) {
+      note["note-title"] = title.textContent;
+      note["note-content"] = content.textContent;
+    }
+  });
+
+  notebooksData.forEach((notebook) => {
+    if (notebook.id == activeNotebook.id) {
+      notebook = activeNotebook;
+    }
+  });
+  localStorage.setItem("notebooksData", JSON.stringify(notebooksData));
+
+}

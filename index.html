@@ -39,7 +39,7 @@
                     </button>
                 </div>
                 <div class="notebooks-container">
-                    
+
                 </div>
 
                 <!--    Overlay for adding new Notebook           -->
@@ -78,7 +78,7 @@
             </div>
             <div class="selectes-notebook-info-wrapper">
                 <p class="selected-notebook-title">
-                    
+
                 </p>
                 <button class="add-new-note-btn">
                     <i class="ri-add-line"></i>
@@ -89,39 +89,66 @@
             <!-- Message when no books are present -->
 
             <div class="no-Notebooks-present-message-wrapper">
-                <img src="https://png.pngtree.com/png-vector/20220807/ourmid/pngtree-cartoon-panda-sleep-png-image_6102474.png" alt="" class="panda-iamge1">
-               <h1>"No notebooks yet! Start by adding your first note to keep track of your ideas."</h1>
-               <button class="first-notebook-btn">Add NoteBook</button>
+                <img src="https://png.pngtree.com/png-vector/20220807/ourmid/pngtree-cartoon-panda-sleep-png-image_6102474.png"
+                    alt="" class="panda-iamge1">
+                <h1>"No notebooks yet! Start by adding your first note to keep track of your ideas."</h1>
+                <button class="first-notebook-btn">Add NoteBook</button>
             </div>
 
             <!-- New Note Overlay -->
-            <div class="overlay" id="add-new-note-overlay">
-                <div class="add-new-note-form">
-                    <h4>Add new note to your notebook</h4>
 
-                    <form action="#" id="newNoteForm">
-                        <input type="text" id="new-notes-title-input" name="note-title" autocomplete="off" placeholder="Note title">
-
-                        <textarea id="new-note-content" name="note-content" placeholder="Add your note.."></textarea>
-                        <div>
-                            <button class="save-note-btn">Save</button>
-                            <button class="cancel-note-btn">Cancel</button>
-                        </div>
-                    </form>
-
-
-                </div>
-            </div>
 
             <div class="notes-wrapper">
-               
-           </div>
-           <div class="no-Notes-present-message-wrapper">
-            <img class="panda-iamge" src="https://png.pngtree.com/png-vector/20240202/ourmid/pngtree-black-and-white-panda-sitting-eating-bamboo-leaves-with-green-and-png-image_11587056.png" alt="panda-iamge">
-            <h3>"No notes in the notebook yet."</h3>
-            <button class="first-note-btn">Add Note</button>
-         </div>
+
+            </div>
+            <div class="no-Notes-present-message-wrapper">
+                <img class="panda-iamge"
+                    src="https://png.pngtree.com/png-vector/20240202/ourmid/pngtree-black-and-white-panda-sitting-eating-bamboo-leaves-with-green-and-png-image_11587056.png"
+                    alt="panda-iamge">
+                <h3>"No notes in the notebook yet."</h3>
+                <button class="first-note-btn">Add Note</button>
+            </div>
         </div>
+        <div class="overlay" id="add-new-note-overlay">
+            <div class="add-new-note-form">
+                <h4>Add new note to your notebook</h4>
+
+                <form action="#" id="newNoteForm">
+                    <input type="text" id="new-notes-title-input" name="note-title" autocomplete="off"
+                        placeholder="Note title">
+
+                    <textarea id="new-note-content" name="note-content" placeholder="Add your note.."></textarea>
+                    <div>
+                        <button class="save-note-btn">Save</button>
+                        <button class="cancel-note-btn">Cancel</button>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+
+        <div class="overlay" id="notes-data-overlay">
+            <div class="note-data-wrapper">
+                <div class="note-data-title-wrapper">
+                    <h3 class="note-title" contenteditable="false">Functions</h3>
+                    <div class="note-data-btns-wrapper">
+                        <button class="edit-notedata-btn" >
+                            Edit
+                        </button>
+                        <button class="save-edit-note-btn">Save</button>
+                        <button class="close-note-data">
+                            <i class="ri-close-line"></i>
+                        </button>
+                    </div>
+                </div>
+               
+                <div class="note-data-content-wrapper" contenteditable="false">
+                   
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
