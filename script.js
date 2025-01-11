@@ -28,6 +28,13 @@ const noNotesPresentWrapper = document.querySelector('.no-Notes-present-message-
 
 let notebooksData = [];
 let activeNotebookId;
+let theme = localStorage.getItem('theme') || 'light' 
+
+if(theme == 'dark'){
+  document.body.classList.add("dark");
+    moon.classList.add("active");
+    sun.classList.remove("active");
+}
 
 // Function to change the theme
 
@@ -36,10 +43,12 @@ const themeChange = () => {
     document.body.classList.remove("dark");
     sun.classList.add("active");
     moon.classList.remove("active");
+    localStorage.setItem('theme','light')
   } else {
     document.body.classList.add("dark");
     moon.classList.add("active");
     sun.classList.remove("active");
+    localStorage.setItem('theme','dark')
   }
 };
 themeToggleBtn.addEventListener("click", themeChange);
@@ -93,6 +102,10 @@ const setCurrentDate = () => {
 };
 
 setCurrentDate();
+
+
+
+
 
 // function to fetch the data from the local storage and set the data
 
