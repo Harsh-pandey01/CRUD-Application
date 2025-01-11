@@ -7,7 +7,7 @@ const addNewNoteBtn = document.querySelector(".add-new-note-btn");
 const cancelNewNoteBtn = document.querySelector(".cancel-note-btn");
 const saveNewNoteBtn = document.querySelector(".save-note-btn");
 const firstNotebookBtn = document.querySelector(".first-notebook-btn");
-const firstNoteBtn = document.querySelector('.first-note-btn')
+const firstNoteBtn = document.querySelector(".first-note-btn");
 // Slections all the different containers
 const notebooksContainer = document.querySelector(".notebooks-container");
 const allNotebooks = document.querySelectorAll(".notebook");
@@ -23,17 +23,19 @@ const selectedNotebookTitle = document.querySelector(
   ".selected-notebook-title"
 );
 const appRightWrapper = document.querySelector(".app-right-section");
-const noNotesPresentWrapper = document.querySelector('.no-Notes-present-message-wrapper')
+const noNotesPresentWrapper = document.querySelector(
+  ".no-Notes-present-message-wrapper"
+);
 // Data Regarding the notebooks and the books present in the notes
 
 let notebooksData = [];
 let activeNotebookId;
-let theme = localStorage.getItem('theme') || 'light' 
+let theme = localStorage.getItem("theme") || "light";
 
-if(theme == 'dark'){
+if (theme == "dark") {
   document.body.classList.add("dark");
-    moon.classList.add("active");
-    sun.classList.remove("active");
+  moon.classList.add("active");
+  sun.classList.remove("active");
 }
 
 // Function to change the theme
@@ -43,12 +45,12 @@ const themeChange = () => {
     document.body.classList.remove("dark");
     sun.classList.add("active");
     moon.classList.remove("active");
-    localStorage.setItem('theme','light')
+    localStorage.setItem("theme", "light");
   } else {
     document.body.classList.add("dark");
     moon.classList.add("active");
     sun.classList.remove("active");
-    localStorage.setItem('theme','dark')
+    localStorage.setItem("theme", "dark");
   }
 };
 themeToggleBtn.addEventListener("click", themeChange);
@@ -103,10 +105,6 @@ const setCurrentDate = () => {
 
 setCurrentDate();
 
-
-
-
-
 // function to fetch the data from the local storage and set the data
 
 const fetchNotebooksDataFromLS = () => {
@@ -129,7 +127,7 @@ function handleNotebooksLoad() {
     appRightWrapper.classList.add("notebook-present");
   } else {
     appRightWrapper.classList.remove("notebook-present");
-    noNotesPresentWrapper.classList.remove('active')
+    noNotesPresentWrapper.classList.remove("active");
   }
   notebooksData.forEach((notebook) => {
     let newNotebook = document.createElement("div");
@@ -161,7 +159,7 @@ function handleNotebooksLoad() {
       .querySelector(".edit-notebook-title-btn")
       .addEventListener("click", (e) => {
         e.stopPropagation();
-        editNotebookTitle(newNotebook);
+        editNotebookTitle(newNotebook,notebook);
       });
 
     // Functionality of deleting a notebook
@@ -176,7 +174,6 @@ function handleNotebooksLoad() {
     // Event Listener for the notebook when it is clicked and active
 
     newNotebook.addEventListener("click", (e) => {
-
       notebooksData.forEach((data) => {
         if (data.id == notebook.id) {
           data.isActive = true;
@@ -194,8 +191,10 @@ function handleNotebooksLoad() {
 
 // Function of editing the title of the notebook
 
-function editNotebookTitle(notebook) {
-  const titleDiv = notebook.querySelector(".notebook-title");
+function editNotebookTitle(notebookWrapper , currentNotebookData) {
+  
+
+  const titleDiv = notebookWrapper.querySelector(".notebook-title");
   titleDiv.contentEditable = "true";
   titleDiv.focus();
 
@@ -204,7 +203,16 @@ function editNotebookTitle(notebook) {
   });
 
   titleDiv.addEventListener("blur", function () {
+    selectedNotebookTitle.textContent = titleDiv.textContent;
     titleDiv.contentEditable = "false";
+    notebooksData.forEach((data) => {
+      if (data.id == currentNotebookData.id) {
+        currentNotebookData.title = titleDiv.textContent;
+      } 
+    });
+
+    localStorage.setItem("notebooksData", JSON.stringify(notebooksData));
+    fetchNotebooksDataFromLS();
   });
 }
 
@@ -266,14 +274,12 @@ firstNotebookBtn.addEventListener("click", () => {
   addNewNotebookBtn.click();
 });
 
-
 // --------------------------------- Notes Section
 
 // adding first Note Btn
-firstNoteBtn.addEventListener('click',()=>{
-  addNewNoteBtn.click()
-})
-
+firstNoteBtn.addEventListener("click", () => {
+  addNewNoteBtn.click();
+});
 
 //  To prevent the default submit behaviour of the form
 newNoteForm.addEventListener("submit", (e) => {
@@ -315,12 +321,9 @@ saveNewNoteBtn.addEventListener("click", handleAddNewNote);
 function handleListingAllNotes(activeNotebook) {
   notesWrapper.innerHTML = "";
 
-  
   if (activeNotebook.notes.length > 0) {
-    noNotesPresentWrapper.classList.remove('active')
+    noNotesPresentWrapper.classList.remove("active");
     activeNotebook.notes.forEach((note) => {
-      
-
       const noteElement = document.createElement("div");
       noteElement.classList.add("note");
       noteElement.innerHTML = `
@@ -348,8 +351,8 @@ function handleListingAllNotes(activeNotebook) {
 
       notesWrapper.append(noteElement);
     });
-  }else{
-     noNotesPresentWrapper.classList.add('active')
+  } else {
+    noNotesPresentWrapper.classList.add("active");
   }
 }
 
