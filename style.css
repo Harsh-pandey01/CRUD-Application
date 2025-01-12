@@ -90,6 +90,18 @@ html {
     display: flex;
 }
 
+header{
+    
+    width: 100%;
+    background-color: var(--second-light-color);
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(214, 214, 214, 0.281);
+}
 
 .app-left-section {
     height: 100%;
@@ -97,11 +109,13 @@ html {
     background-color: var(--second-light-color);
     padding: 1rem;
     display: flex;
+  
     flex-direction: column;
 }
 
 .app-title {
     font-size: var(--fs-2);
+  
 }
 
 
@@ -109,7 +123,7 @@ html {
 /* Notebooks section */
 .notebooks-section {
     margin-top: 15px;
-    flex: 1;
+   flex: 1;
 }
 
 .notebooks-section-header {
@@ -381,6 +395,11 @@ textarea::-webkit-scrollbar-thumb {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 3rem;
+}
+.greeting{
+    margin-top: 5px;
+    color: var(--black-light); 
 }
 
 .todays-date {
@@ -395,7 +414,7 @@ textarea::-webkit-scrollbar-thumb {
     display: flex;
     align-items: center;
     justify-content: center;
-
+    color: var(--black-light);
 }
 
 .theme-toggle-btns button {
@@ -405,7 +424,7 @@ textarea::-webkit-scrollbar-thumb {
     position: absolute;
     right: 10px;
     cursor: pointer;
-    color: var(--font-color);
+    color: var(--black-light);
     display: none;
 }
 
@@ -632,3 +651,112 @@ textarea::-webkit-scrollbar-thumb {
     top: 15px;
     font-size: 1.25rem;
 }
+
+
+/* Adding Media Queries For Various Devices --------------------------------- */
+
+/* We have design for lappy and big devices , we have to change for the tablets and mobiles */
+
+@media screen and (max-width : 800px) {
+    
+    body{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .app-wrapper{
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+     .app-left-section{
+        width: 100%;
+        height: 56px;
+        padding: 0.5rem;
+     } 
+     .app-right-section{
+        flex: 1;
+      
+     }
+     .notebooks-section{
+        display: flex;
+        flex-direction: row;
+        margin-top: 0;
+        align-items: center;
+     }
+   
+     .notebooks-container {
+        flex: 1;
+        width: auto;
+        flex-direction: row;
+        margin-top: 0;
+        
+        padding: 5px ;
+     }
+     .notebooks-container.notebook-present{
+        overflow-x: scroll;
+     }
+     .notebooks-container::-webkit-scrollbar {
+      height: 2px;
+      width: 2px;
+      }
+      
+      /* Style the scrollbar track */
+      .notebooks-container::-webkit-scrollbar-track {
+        background: #f1f1f1; /* Track background color */
+        border-radius: 10px; /* Rounded corners */
+      }
+      
+      /* Style the scrollbar thumb (the draggable part of the scrollbar) */
+      .notebooks-container::-webkit-scrollbar-thumb {
+        background: #888; /* Thumb color */
+        border-radius: 10px; /* Rounded corners */
+      }
+      
+      /* Style the thumb when hovering */
+      .notebooks-container::-webkit-scrollbar-thumb:hover {
+        background: #555; /* Darker thumb color on hover */
+      }
+
+      .notebooks-section-header{
+        height: 100%;
+        display: flex;
+        gap: 10px;
+        
+        border-right: 1px solid rgba(128, 128, 128, 0.425);
+      }
+      .notebook {
+        font-size: var(--fs-9);
+        padding: 2px 10px;
+        transition: var(--transition-timing);
+        border-radius: 1px;
+        border: 1px solid var(--third-light-color);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-width: 200px;
+        max-width: 250px;
+    }
+      .notebook-title{
+        white-space: nowrap; /* Prevent the paragraph from wrapping to the next line */
+        overflow: hidden; /* Hide any overflow content */
+        text-overflow: ellipsis;
+      }
+}
+
+
+@media screen and (max-width : 325px) {
+    .app-title{
+        font-size: 15px;
+    }
+    .greeting{
+        font-size: 12px;
+    }
+}
+
+
+
+
+
+

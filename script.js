@@ -129,11 +129,15 @@ fetchNotebooksDataFromLS();
 function handleNotebooksLoad() {
   // loading each and every notebooks based on the notebooks data
   notebooksContainer.innerHTML = "";
+  
   if (notebooksData.length > 0) {
     appRightWrapper.classList.add("notebook-present");
+    notebooksContainer.classList.add('notebook-present')
   } else {
     appRightWrapper.classList.remove("notebook-present");
     noNotesPresentWrapper.classList.remove("active");
+    notebooksContainer.classList.remove('notebook-present')
+    notesWrapper.innerHTML = ""
   }
   notebooksData.forEach((notebook) => {
     let newNotebook = document.createElement("div");
@@ -233,7 +237,7 @@ function deleteNotebook(notebookId) {
       activeNotebookId = "";
     }
   }
-
+  
   localStorage.setItem("notebooksData", JSON.stringify(newData));
   fetchNotebooksDataFromLS();
 }
@@ -323,6 +327,8 @@ saveNewNoteBtn.addEventListener("click", handleAddNewNote);
 // Function to list all the notebook of the active notebook
 
 function handleListingAllNotes(activeNotebook) {
+
+  
   notesWrapper.innerHTML = "";
 
   if (activeNotebook.notes.length > 0) {
@@ -480,7 +486,6 @@ function handleModifyingAndSavingNote(
   activeNotebook
 ) {
   // Steps :- Locally from the notes section of the active page change the notes and then update the notes throught localstorage and rerender on the website
-  console.log(activeNotebook);
 
   activeNotebook.notes.forEach((note) => {
     if (note.id == noteElementData.id) {
