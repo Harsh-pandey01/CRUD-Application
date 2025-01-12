@@ -743,6 +743,9 @@ textarea::-webkit-scrollbar-thumb {
         overflow: hidden; /* Hide any overflow content */
         text-overflow: ellipsis;
       }
+      .notebook button{
+        opacity: 1;
+    }
 }
 
 
@@ -752,6 +755,9 @@ textarea::-webkit-scrollbar-thumb {
     }
     .greeting{
         font-size: 12px;
+    }
+    .notebook button{
+        opacity: 1;
     }
 }
 
