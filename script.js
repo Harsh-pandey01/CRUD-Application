@@ -553,7 +553,8 @@ loadingAnimationTimeline.from('.no-Notes-present-message-wrapper.active',{
 })
 loadingAnimationTimeline.from('.note',{
   opacity : 0 ,
-  duration : 0.3,
+  duration : 0.5,
   y:10,
-  stagger : 1
+  stagger : 0.2,
+    ease : "ease.out"
 })
