@@ -502,3 +502,58 @@ function handleModifyingAndSavingNote(
   localStorage.setItem("notebooksData", JSON.stringify(notebooksData));
 
 }
+
+
+// Loading Animations ------------------------------
+
+const loadingAnimationTimeline = gsap.timeline()
+
+loadingAnimationTimeline.from('.app-title',{
+  opacity : 0 ,
+  duration : 0.3 ,
+  y:10
+})
+
+loadingAnimationTimeline.from('.greetings-wrapper',{
+  opacity : 0 ,
+  duration : 0.3,
+  y:10
+})
+loadingAnimationTimeline.from('.theme-toggle-btns',{
+  opacity : 0 ,
+  duration : 0.3,
+  y:10
+})
+
+loadingAnimationTimeline.from('.notebooks-section-header',{
+  opacity : 0 ,
+  duration : 0.3,
+  y:10
+})
+loadingAnimationTimeline.from('.notebooks-container',{
+  opacity : 0 ,
+  duration : 0.3,
+  y:10
+})
+gsap.from('.selectes-notebook-info-wrapper',{
+  opacity : 0 ,
+  duration : 0.3,
+  delay:0.9,
+  y:10
+})
+loadingAnimationTimeline.from('.no-Notebooks-present-message-wrapper',{
+  opacity : 0 ,
+  duration : 0.3,
+  y:10
+})
+loadingAnimationTimeline.from('.no-Notes-present-message-wrapper.active',{
+  opacity : 0 ,
+  duration : 0.3,
+  y:10
+})
+loadingAnimationTimeline.from('.note',{
+  opacity : 0 ,
+  duration : 0.3,
+  y:10,
+  stagger : 1
+})
